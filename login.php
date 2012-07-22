@@ -26,15 +26,11 @@ if (!defined('W2P_BASE_DIR')) {
                 <input type="hidden" name="login" value="<?php echo time(); ?>" />
                 <input type="hidden" name="lostpass" value="0" />
                 <input type="hidden" name="redirect" value="<?php echo $redirect; ?>" />
-                <tr>
-                    <td colspan="2">
-                        <?php
-                        if (function_exists('styleRenderBoxTop')) {
-                            echo styleRenderBoxTop();
-                        }
-                        ?>
-                    </td>
-                </tr>
+                <?php
+                if (function_exists('styleRenderBoxTop')) {
+                    echo '<tr><td colspan="2">'.styleRenderBoxTop().'</td></tr>';
+                }
+                ?>
                 <tr>
                     <th style="padding:6px" colspan="2"><em><?php echo $w2Pconfig['company_name']; ?></em></th>
                 </tr>
@@ -58,15 +54,11 @@ if (!defined('W2P_BASE_DIR')) {
                          <td style="padding:6px" colspan="2" nowrap="nowrap"><a href="javascript: void(0);" onclick="javascript:window.location='./newuser.php'"><?php echo $AppUI->_('newAccountSignup'); ?></a></td>
                     </tr>
                 <?php } ?>
-                <tr>
-                    <td colspan="2">
-                        <?php
-                        if (function_exists('styleRenderBoxBottom')) {
-                            echo styleRenderBoxBottom();
-                        }
-                        ?>
-                    </td>
-                </tr>
+                <?php
+                if (function_exists('styleRenderBoxBottom')) {
+                    echo '<tr><td colspan="2">'.styleRenderBoxBottom().'</td></tr>';
+                }
+                ?>
             </table>
             <?php if ($AppUI->getVersion()) { ?>
                 <div align="center">
