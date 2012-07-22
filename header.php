@@ -1,30 +1,40 @@
-<?php /* STYLE/DEFAULT $Id: header.php,v 1.37 2005/02/26 01:09:15 gregorerhardt Exp $ */
-$dialog = dPgetParam( $_GET, 'dialog', 0 );
-if ($dialog)
+<?php /* $Id$ $URL$ */
+$dialog = w2PgetParam($_GET, 'dialog', 0);
+if ($dialog) {
 	$page_title = '';
-else
-	$page_title = $dPconfig['page_title'] . '&nbsp;' . $AppUI->getVersion();
+} else {
+	$page_title = ($w2Pconfig['page_title'] == 'web2Project') ? $w2Pconfig['page_title'] . '&nbsp;' . $AppUI->getVersion() : $w2Pconfig['page_title'];
+}
+// Include the file first of all, so that the AJAX methods are printed through xajax below
+require W2P_BASE_DIR . '/includes/ajax_functions.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta name="Description" content="WebbPlatsen Sober" />
-	<meta name="Version" content="<?php echo @$AppUI->getVersion();?>" />
-	<meta http-equiv="Content-Type" content="text/html;charset=<?php echo isset( $locale_char_set ) ? $locale_char_set : 'ISO-8859-1';?>" />
-	<title><?php echo @dPgetConfig( 'page_title' );?></title>
-	<link rel="stylesheet" type="text/css" href="./style/<?php echo $uistyle;?>/main.css" media="all" />
-	<style type="text/css" media="all">@import "./style/<?php echo $uistyle;?>/main.css";</style>
-	<link rel="shortcut icon" href="./style/<?php echo $uistyle;?>/images/favicon.ico" type="image/ico" />
-	<?php @$AppUI->loadJS(); ?>
-</head>
+    <head>
+        <meta name="Description" content="web2Project Default Style" />
+        <meta name="Version" content="<?php echo $AppUI->getVersion(); ?>" />
+        <meta http-equiv="Content-Type" content="text/html;charset=<?php echo isset($locale_char_set) ? $locale_char_set : 'UTF-8'; ?>" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title><?php echo @w2PgetConfig('page_title') . ' :: ' . $AppUI->_($m) . ' ' . $AppUI->_($a); ?></title>
+        <link rel="stylesheet" type="text/css" href="./style/common.css" media="all" charset="utf-8"/>
+        <link rel="stylesheet" type="text/css" href="./style/<?php echo $uistyle; ?>/main.css" media="all" charset="utf-8"/>
+        <style type="text/css" media="all">@import "./style/<?php echo $uistyle; ?>/main.css";</style>
+        <link rel="shortcut icon" href="./style/<?php echo $uistyle; ?>/favicon.ico" type="image/ico" />
+        <?php
+            if (isset($xajax) && is_object($xajax)) {
+                $xajax->printJavascript(w2PgetConfig('base_url') . '/lib/xajax');
+            }
+        ?>
+        <?php $AppUI->loadHeaderJS(); ?>
+    </head>
 
 <body onload="this.focus();">
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr>
 	<td><table class="banner" width='100%' cellpadding="3" cellspacing="0" border="0" background="style/<?php echo $uistyle;?>/images/titlegrad.jpg"><tr>
 	<th align="left"><strong><?php
-		echo "<a style='color: white' href='{$dPconfig['base_url']}'>$page_title</a>";
+		echo "<a style='color: white' href='{$w2Pconfig['base_url']}'>$page_title</a>";
 	?></strong></th>
 	<th align="right" width='95'><a href='http://www.dotproject.net/' <?php if ($dialog) echo "target='_blank'"; ?>><img src="style/<?php echo $uistyle;?>/images/dp_icon.gif" border=0></a></th>
 	</tr></table></td>
@@ -88,7 +98,7 @@ else
 		<tr>
 			<td width="100%"><?php echo $AppUI->_('Welcome')." $AppUI->user_first_name $AppUI->user_last_name"; ?></td>
 			<td nowrap="nowrap">
-				<?php echo dPcontextHelp( 'Help' );?> |
+				<?php echo w2PcontextHelp( 'Help' );?> |
 				<a href="./index.php?m=admin&a=viewuser&user_id=<?php echo $AppUI->user_id;?>"><?php echo $AppUI->_('My Info');?></a> |
 <?php
 	if ($perms->checkModule('calendar', 'access')) {

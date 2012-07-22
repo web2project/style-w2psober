@@ -1,15 +1,12 @@
 <?php /* STYLE/DEFAULT $Id: overrides.php,v 1.14 2005/03/11 04:18:03 ajdonnison Exp $ */
 
-class CTitleBlock extends CTitleBlock_core {
-}
-
 ##
 ##  This overrides the show function of the CTabBox_core function
 ##
 class CTabBox extends CTabBox_core {
 	function show( $extra='', $js_tabs = false ) {
-		GLOBAL $AppUI, $dPconfig, $currentTabId, $currentTabName;
-		$uistyle = $AppUI->getPref( 'UISTYLE' ) ? $AppUI->getPref( 'UISTYLE' ) : $dPconfig['host_style'];
+		GLOBAL $AppUI, $w2Pconfig, $currentTabId, $currentTabName;
+		$uistyle = $AppUI->getPref( 'UISTYLE' ) ? $AppUI->getPref( 'UISTYLE' ) : $w2Pconfig['host_style'];
 		if (! $uistyle)
 		  $uistyle = 'default';
 		reset( $this->tabs );
