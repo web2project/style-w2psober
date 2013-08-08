@@ -1,4 +1,18 @@
-<?php /* STYLE/DEFAULT $Id: overrides.php,v 1.14 2005/03/11 04:18:03 ajdonnison Exp $ */
+<?php
+if (!defined('W2P_BASE_DIR')) {
+    die('You should not access this file directly.');
+}
+
+class style_w2psober extends w2p_Theme_Base
+{
+    public function __construct($AppUI, $m = '')
+    {
+        $this->_uistyle = 'w2psober';
+        $this->_uiname  = 'web2project sober';
+
+        parent::__construct($AppUI, $m);
+    }
+}
 
 ##
 ##  This overrides the show function of the CTabBox_core function
